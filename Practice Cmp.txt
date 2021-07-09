@@ -1,0 +1,30 @@
+<aura:component controller="accountsWithContactsClass" implements="flexipage:availableForRecordHome,force:hasRecordId"> <!--inherit recordId attribute-->
+    <aura:attribute name="accList" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:accordion>
+    <aura:iteration items="{!v.accList}" var="acc">
+        <lightning:accordionSection name="{!acc.Name}" label="{!acc.Name}">
+            <p><b>Account Name : {!acc.Name}</b>
+            </p>
+            <table>
+            <tbody>
+                <tr>
+                <lightning:accordion>
+                    <aura:iteration items="{!acc.Contacts}" var="con">
+                    <lightning:accordionSection name="Related Contacts" label="Related Contacts">
+                         <aura:set attribute="body">
+                                                
+                                                <p>FirstName : {!con.FirstName}</p>
+                                                <p>LastName : {!con.LastName}</p>
+                                                
+                                            </aura:set>
+                        </lightning:accordionSection>
+                    </aura:iteration>
+                    </lightning:accordion>
+                </tr>
+                </tbody>
+            </table>
+        </lightning:accordionSection>
+        </aura:iteration>
+    </lightning:accordion>
+</aura:component>
